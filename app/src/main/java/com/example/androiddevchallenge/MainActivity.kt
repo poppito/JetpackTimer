@@ -144,8 +144,6 @@ fun MyApp(text: MutableState<String>) {
         AnimatedVisibility(visible = timerSet.value) {
             Text(
                 text = timerText.value,
-                modifier = Modifier
-                    .padding(16.dp),
                 style = MaterialTheme.typography.h1
             )
         }

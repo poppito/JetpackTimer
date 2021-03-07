@@ -37,7 +37,11 @@ val typography = Typography(
 
     h1 = TextStyle(
         fontFamily = Volkorn,
-        fontSize = 28.sp
+        fontSize = 44.sp
+    ),
+    h3 = TextStyle(
+        fontFamily = Volkorn,
+        fontSize = 24.sp
     )
     /* Other default text styles to override
 button = TextStyle(

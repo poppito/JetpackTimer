@@ -21,7 +21,6 @@ import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -76,7 +75,7 @@ fun MyApp(text: MutableState<String>) {
         AnimatedVisibility(visible = !timerSet.value) {
             Text(
                 text = stringResource(id = R.string.txt_set_timer),
-                style = MaterialTheme.typography.h3
+                style = MaterialTheme.typography.h1
             )
         }
         AnimatedVisibility(visible = !timerSet.value) {
@@ -96,7 +95,7 @@ fun MyApp(text: MutableState<String>) {
                         text.value = it
                         error.value = (!it.isNumber() && !it.equals(""))
                     },
-                    label = { Text("Enter number in seconds") },
+                    label = { Text(stringResource(R.string.txt_hint)) },
                     isError = error.value
                 )
                 Text(
@@ -122,7 +121,8 @@ fun MyApp(text: MutableState<String>) {
                         } else {
                             startTimer(
                                 timerText = timerText,
-                                count = text.value.toLong() * 1000
+                                count = text.value.toLong() * 1000,
+                                timerSet = timerSet
                             )
                             timer.start()
                             timerSet.value = true
@@ -135,27 +135,19 @@ fun MyApp(text: MutableState<String>) {
                 ) {
                     val timerIsSet = timerSet.value
                     Text(
-                        text = stringResource(id = R.string.btn_go)
+                        text = stringResource(id = R.string.btn_go),
+                        style = MaterialTheme.typography.body2
                     )
                 }
             }
         }
         AnimatedVisibility(visible = timerSet.value) {
-            Row(
+            Text(
+                text = timerText.value,
                 modifier = Modifier
-                    .fillMaxWidth()
                     .padding(16.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
-            ) {
-                Text(
-                    text = timerText.value,
-                    modifier = Modifier
-                        .padding(16.dp)
-                        .fillMaxWidth(),
-                    style = MaterialTheme.typography.h3
-                )
-            }
+                style = MaterialTheme.typography.h1
+            )
         }
 
         AnimatedVisibility(visible = timerSet.value) {
@@ -169,14 +161,19 @@ fun MyApp(text: MutableState<String>) {
                     .padding(16.dp)
             ) {
                 Text(
-                    text = stringResource(id = R.string.btn_cancel)
+                    text = stringResource(id = R.string.btn_cancel),
+                    style = MaterialTheme.typography.body2
                 )
             }
         }
     }
 }
 
-private fun startTimer(timerText: MutableState<String>, count: Long) {
+private fun startTimer(
+    timerText: MutableState<String>,
+    count: Long,
+    timerSet: MutableState<Boolean>
+) {
     timer = object : CountDownTimer(count, 1000) {
         override fun onTick(millisUntilFinished: Long) {
             timerText.value = (millisUntilFinished / 1000L).toString()
@@ -184,6 +181,7 @@ private fun startTimer(timerText: MutableState<String>, count: Long) {
 
         override fun onFinish() {
             timerText.value = ""
+            timerSet.value = false
         }
     }
 }

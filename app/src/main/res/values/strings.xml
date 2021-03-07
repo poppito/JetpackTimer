@@ -16,4 +16,5 @@
     <string name="btn_cancel">Cancel</string>
     <string name="txt_second">Second</string>
     <string name="txt_seconds">Seconds</string>
+    <string name="txt_hint">Enter a number in seconds</string>
 </resources>

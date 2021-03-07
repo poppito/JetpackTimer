@@ -121,7 +121,7 @@ fun MyApp(text: MutableState<String>) {
                         } else {
                             startTimer(
                                 timerText = timerText,
-                                count = text.value.toLong() * 1000,
+                                count = (text.value.toLong() * 1000),
                                 timerSet = timerSet
                             )
                             timer.start()
@@ -133,7 +133,6 @@ fun MyApp(text: MutableState<String>) {
                         .padding(16.dp),
                     enabled = !error.value
                 ) {
-                    val timerIsSet = timerSet.value
                     Text(
                         text = stringResource(id = R.string.btn_go),
                         style = MaterialTheme.typography.body2
@@ -141,7 +140,8 @@ fun MyApp(text: MutableState<String>) {
                 }
             }
         }
-        AnimatedVisibility(visible = timerSet.value) {
+
+        if (timerSet.value) {
             Text(
                 text = timerText.value,
                 style = MaterialTheme.typography.h1
@@ -174,7 +174,7 @@ private fun startTimer(
 ) {
     timer = object : CountDownTimer(count, 1000) {
         override fun onTick(millisUntilFinished: Long) {
-            timerText.value = (millisUntilFinished / 1000L).toString()
+            timerText.value = ((millisUntilFinished / 1000L) + 1L).toString()
         }
 
         override fun onFinish() {

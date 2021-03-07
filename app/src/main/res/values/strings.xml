@@ -9,7 +9,7 @@
       or implied. See the License for the specific language governing permissions and limitations under
       the License.
       -->
-    <string name="app_name">AndroidDevChallenge</string>
+    <string name="app_name">JetpackTimer</string>
 
     <string name="txt_set_timer">Set a time</string>
     <string name="btn_go">Go!</string>

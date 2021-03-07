@@ -13,4 +13,7 @@
 
     <string name="txt_set_timer">Set a time</string>
     <string name="btn_go">Go!</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="txt_second">Second</string>
+    <string name="txt_seconds">Seconds</string>
 </resources>
